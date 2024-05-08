@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { AuthContext } from "../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 function Todo(props) {
   // Destructure deleteTodo props
@@ -46,12 +46,10 @@ function TodoPage() {
 
   // FN for Delete Todo + API
   const deleteTodo = async (todoId) => {
-    console.log(todoId);
     try {
-      const response = await axios.delete(
+      await axios.delete(
         `https://cc17-assessment-api.onrender.com/v1/todo/${todoId}?userId=28`
       );
-      console.log(response.status);
       const newTodo = [...todos];
       const foundIndex = newTodo.findIndex((todo) => todo.id === todoId);
       if (foundIndex !== -1) {
@@ -86,6 +84,17 @@ function TodoPage() {
     fetchData();
   }, []);
 
+  // FN for Logout
+  const navigate = useNavigate();
+  const handleLogout = async (e) => {
+    e.preventDefault();
+    if (confirm("Are you sure about logging out?") == true) {
+      navigate("/");
+    } else {
+      e.preventDefault();
+    }
+  };
+
   return (
     <div className="page">
       <h1>TodoPage</h1>
@@ -107,7 +116,7 @@ function TodoPage() {
         </ul>
       </div>
       <div className="logout__box">
-        <button>LOG OUT</button>
+        <button onClick={handleLogout}>LOG OUT</button>
       </div>
     </div>
   );

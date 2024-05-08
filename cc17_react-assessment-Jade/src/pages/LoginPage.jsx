@@ -4,7 +4,7 @@ import { AuthContext } from "../context/AuthContext";
 
 function LoginPage() {
   const navigate = useNavigate();
-  const { login } = useContext(AuthContext); // <AuthContext.Provider value={return}>
+  const { login } = useContext(AuthContext);
 
   const [emailOrPhone, setEmailOrPhone] = useState("");
   const [password, setPassword] = useState("");
@@ -18,7 +18,7 @@ function LoginPage() {
       await login({ emailOrPhone, password });
       navigate("/todo");
     } else {
-      alert("Invalid Username or Password!");
+      alert("Incorrect Username or Password!");
     }
   };
 
