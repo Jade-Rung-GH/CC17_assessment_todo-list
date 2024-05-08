@@ -3,11 +3,13 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 
 function Todo(props) {
+  // Destructure deleteTodo props
+  const { deleteTodo } = props;
   return (
-    <li>
+    <li className="todo__list">
       <input type="checkbox"></input>
       {props.title}
-      <button>x</button>
+      <button onClick={() => deleteTodo(props.todoId)}>x</button>
     </li>
   );
 }
@@ -42,6 +44,25 @@ function TodoPage() {
     setInput("");
   };
 
+  // FN for Delete Todo + API
+  const deleteTodo = async (todoId) => {
+    console.log(todoId);
+    try {
+      const response = await axios.delete(
+        `https://cc17-assessment-api.onrender.com/v1/todo/${todoId}?userId=28`
+      );
+      console.log(response.status);
+      const newTodo = [...todos];
+      const foundIndex = newTodo.findIndex((todo) => todo.id === todoId);
+      if (foundIndex !== -1) {
+        newTodo.splice(foundIndex, 1);
+        setTodos(newTodo);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   // Fetch Data from API
   const fetchData = async () => {
     try {
@@ -61,7 +82,7 @@ function TodoPage() {
 
   // For Auto Fetch
   useEffect(() => {
-    alert("Todo is Rendering");
+    // alert("Todo is Rendering");
     fetchData();
   }, []);
 
@@ -76,9 +97,17 @@ function TodoPage() {
       <div className="todo-list__list">
         <ul>
           {todos.map((todo) => (
-            <Todo key={todo.id} userId={todo.id} title={todo.title} />
+            <Todo
+              key={todo.id}
+              todoId={todo.id}
+              title={todo.title}
+              deleteTodo={deleteTodo}
+            />
           ))}
         </ul>
+      </div>
+      <div className="logout__box">
+        <button>LOG OUT</button>
       </div>
     </div>
   );
