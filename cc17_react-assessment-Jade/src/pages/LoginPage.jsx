@@ -13,10 +13,9 @@ function LoginPage() {
   const handleChangePassword = (e) => setPassword(e.target.value);
 
   const handleSubmitLogin = async (e) => {
-    console.log("submit");
     e.preventDefault();
     if (emailOrPhone === "jade_cc17@mail.com" && password === "12345") {
-      await login();
+      await login({ emailOrPhone, password });
       navigate("/todo");
     } else {
       alert("Invalid Username or Password!");

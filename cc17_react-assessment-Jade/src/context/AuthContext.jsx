@@ -6,12 +6,10 @@ export const AuthContext = createContext();
 export default function AuthContextProvider({ children }) {
   const [user, setUser] = useState(null);
 
-  const login = async () => {
-    console.log("hkjhkjhjkhkjh");
+  const login = async ({ emailOrPhone, password }) => {
     try {
-      // Note : api("/login")
-      const response = await userAPI.getUserById();
-      console.log(response.data);
+      const response = await userAPI.getUserById({ emailOrPhone, password });
+      // console.log(response.data);
       setUser(response.data);
     } catch (error) {
       setUser(null);
