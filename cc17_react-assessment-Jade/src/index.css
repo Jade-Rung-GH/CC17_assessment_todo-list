@@ -61,7 +61,7 @@ input, label {
 
 .page {
   width: 100vw;
-  height: 200vh;
+  height: 120vh;
   background-color: #1e1f26;
   color: #ffffff;
   display: flex;

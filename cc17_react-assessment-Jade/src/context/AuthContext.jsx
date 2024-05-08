@@ -7,10 +7,11 @@ export default function AuthContextProvider({ children }) {
   const [user, setUser] = useState(null);
 
   const login = async () => {
+    console.log("hkjhkjhjkhkjh");
     try {
       // Note : api("/login")
-      const response = await userAPI.getUserById("1");
-      // console.log(response.data);
+      const response = await userAPI.getUserById();
+      console.log(response.data);
       setUser(response.data);
     } catch (error) {
       setUser(null);

@@ -1,9 +1,12 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
 import Router from "./routes/Router";
+import AuthContextProvider from "./context/AuthContext";
 
 function App() {
-  return <Router />;
+  return (
+    <AuthContextProvider>
+      <Router />
+    </AuthContextProvider>
+  );
 }
 
 export default App;
