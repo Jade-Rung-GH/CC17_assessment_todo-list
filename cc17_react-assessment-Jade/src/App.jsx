@@ -1,17 +1,9 @@
 import { useState } from "react";
 import reactLogo from "./assets/react.svg";
-import LoginPage from "./pages/LoginPage";
-import TodoPage from "./pages/TodoPage";
+import Router from "./routes/Router";
 
 function App() {
-  return (
-    <>
-      {/* // Login Page */}
-      <LoginPage />
-      {/* // Todo Page */}
-      <TodoPage />
-    </>
-  );
+  return <Router />;
 }
 
 export default App;
